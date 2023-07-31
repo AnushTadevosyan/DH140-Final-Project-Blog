@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Final_Project - date-modified: “07/26/2023”</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Final_Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">date-modified: “07/26/2023”</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>– title: “Crime in United States” description: “This blogpost is analyzing crimes in US states over range of years” author: “Anush Tadevosyan” date: “07/26/2023”</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>For this project, I have chosen to work with the dataset that contains information about various crimes in US states for a wide range of years</p>
+<p>Link to Dataset: https://corgis-edu.github.io/corgis/csv/state_crime/</p>
+<p>I have chosen this dataset as I was always interested in crime stories, documentaries and statistics. I am curious to see what I can find. My end goal is to find the safest state and the most dangerous state in terms of crimes and try to predict which state will be safest in future and which state will be more dangerous in future using machine learning!</p>
+<p>To-DO : see which state had highest type of crime per year</p>
+</section>
+<section id="data-presentation-exploration" class="level1">
+<h1>Data Presentation &amp; Exploration</h1>
+<p><strong>Basic Information</strong>: The dataset classify crimes into two groups: property &amp; violent crime.Property crime refers to burglary, larceny, and motor related crime while violent crime refers to assault, murder, rape, and robbery. These reports go from 1960 to 2019. With this in mind, let’s understand and explore our data.</p>
+<p>The dataset has 21 columns and 3115 rows. We can see that the years of data goes from 1960 to 2019. We can also see that half of data is for years 1990-2019. If we look at overall rate of the two major types of crimes (property &amp; violent)</p>
+<p>It should include at least 4 exploratory data visualizations</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>crime_data <span class="op">=</span> pd.read_csv(<span class="st">'/home/jovyan/DH140-Final-Project/state_crime.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#total data summary</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>crime_data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Year</th>
+<th data-quarto-table-cell-role="th">Data.Population</th>
+<th data-quarto-table-cell-role="th">Data.Rates.Property.All</th>
+<th data-quarto-table-cell-role="th">Data.Rates.Property.Burglary</th>
+<th data-quarto-table-cell-role="th">Data.Rates.Property.Larceny</th>
+<th data-quarto-table-cell-role="th">Data.Rates.Property.Motor</th>
+<th data-quarto-table-cell-role="th">Data.Rates.Violent.All</th>
+<th data-quarto-table-cell-role="th">Data.Rates.Violent.Assault</th>
+<th data-quarto-table-cell-role="th">Data.Rates.Violent.Murder</th>
+<th data-quarto-table-cell-role="th">Data.Rates.Violent.Rape</th>
+<th data-quarto-table-cell-role="th">Data.Rates.Violent.Robbery</th>
+<th data-quarto-table-cell-role="th">Data.Totals.Property.All</th>
+<th data-quarto-table-cell-role="th">Data.Totals.Property.Burglary</th>
+<th data-quarto-table-cell-role="th">Data.Totals.Property.Larceny</th>
+<th data-quarto-table-cell-role="th">Data.Totals.Property.Motor</th>
+<th data-quarto-table-cell-role="th">Data.Totals.Violent.All</th>
+<th data-quarto-table-cell-role="th">Data.Totals.Violent.Assault</th>
+<th data-quarto-table-cell-role="th">Data.Totals.Violent.Murder</th>
+<th data-quarto-table-cell-role="th">Data.Totals.Violent.Rape</th>
+<th data-quarto-table-cell-role="th">Data.Totals.Violent.Robbery</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>3115.000000</td>
+<td>3.115000e+03</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+<td>3.115000e+03</td>
+<td>3.115000e+03</td>
+<td>3.115000e+03</td>
+<td>3.115000e+03</td>
+<td>3.115000e+03</td>
+<td>3.115000e+03</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+<td>3115.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>1989.544141</td>
+<td>9.708502e+06</td>
+<td>3542.202311</td>
+<td>876.532520</td>
+<td>2322.659133</td>
+<td>343.011300</td>
+<td>397.877047</td>
+<td>237.365040</td>
+<td>6.477207</td>
+<td>30.179872</td>
+<td>123.853258</td>
+<td>3.560081e+05</td>
+<td>8.977698e+04</td>
+<td>2.275827e+05</td>
+<td>3.864856e+04</td>
+<td>4.594917e+04</td>
+<td>2.659748e+04</td>
+<td>663.911717</td>
+<td>3034.240449</td>
+<td>15653.541894</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>17.299570</td>
+<td>3.506750e+07</td>
+<td>1418.191397</td>
+<td>446.531611</td>
+<td>897.934463</td>
+<td>221.654068</td>
+<td>287.498896</td>
+<td>159.336737</td>
+<td>5.886449</td>
+<td>16.694626</td>
+<td>143.261882</td>
+<td>1.321823e+06</td>
+<td>3.376635e+05</td>
+<td>8.460659e+05</td>
+<td>1.469896e+05</td>
+<td>1.759960e+05</td>
+<td>1.032963e+05</td>
+<td>2437.666178</td>
+<td>11714.612850</td>
+<td>60348.473626</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>1960.000000</td>
+<td>2.261670e+05</td>
+<td>573.100000</td>
+<td>126.300000</td>
+<td>293.300000</td>
+<td>28.400000</td>
+<td>9.500000</td>
+<td>3.600000</td>
+<td>0.200000</td>
+<td>0.800000</td>
+<td>1.900000</td>
+<td>3.147000e+03</td>
+<td>7.510000e+02</td>
+<td>1.489000e+03</td>
+<td>1.780000e+02</td>
+<td>3.700000e+01</td>
+<td>1.400000e+01</td>
+<td>1.000000</td>
+<td>6.000000</td>
+<td>8.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>1975.000000</td>
+<td>1.279156e+06</td>
+<td>2472.650000</td>
+<td>535.000000</td>
+<td>1663.800000</td>
+<td>185.600000</td>
+<td>217.200000</td>
+<td>124.000000</td>
+<td>3.100000</td>
+<td>18.500000</td>
+<td>42.700000</td>
+<td>3.974500e+04</td>
+<td>9.613500e+03</td>
+<td>2.619500e+04</td>
+<td>3.227000e+03</td>
+<td>3.318000e+03</td>
+<td>2.056000e+03</td>
+<td>48.000000</td>
+<td>328.000000</td>
+<td>816.500000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>1990.000000</td>
+<td>3.358000e+06</td>
+<td>3438.400000</td>
+<td>796.600000</td>
+<td>2275.700000</td>
+<td>288.900000</td>
+<td>342.200000</td>
+<td>205.100000</td>
+<td>5.400000</td>
+<td>28.800000</td>
+<td>93.800000</td>
+<td>1.092840e+05</td>
+<td>2.703800e+04</td>
+<td>7.142300e+04</td>
+<td>9.468000e+03</td>
+<td>1.154800e+04</td>
+<td>6.755000e+03</td>
+<td>186.000000</td>
+<td>931.000000</td>
+<td>3256.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>2005.000000</td>
+<td>6.082836e+06</td>
+<td>4439.100000</td>
+<td>1133.850000</td>
+<td>2877.500000</td>
+<td>437.200000</td>
+<td>518.250000</td>
+<td>319.350000</td>
+<td>8.400000</td>
+<td>39.800000</td>
+<td>152.800000</td>
+<td>2.253325e+05</td>
+<td>5.562000e+04</td>
+<td>1.461155e+05</td>
+<td>2.124150e+04</td>
+<td>2.880400e+04</td>
+<td>1.756700e+04</td>
+<td>464.000000</td>
+<td>1930.000000</td>
+<td>8337.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>2019.000000</td>
+<td>3.282395e+08</td>
+<td>9512.100000</td>
+<td>2906.700000</td>
+<td>5833.800000</td>
+<td>1839.900000</td>
+<td>2921.800000</td>
+<td>1557.600000</td>
+<td>80.600000</td>
+<td>161.600000</td>
+<td>1635.100000</td>
+<td>1.296112e+07</td>
+<td>3.795200e+06</td>
+<td>8.142228e+06</td>
+<td>1.661738e+06</td>
+<td>1.932274e+06</td>
+<td>1.135607e+06</td>
+<td>24703.000000</td>
+<td>139815.000000</td>
+<td>687732.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first major crime group summary: property</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'Data.Totals.Property.All'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>count    3.115000e+03
+mean     3.560081e+05
+std      1.321823e+06
+min      3.147000e+03
+25%      3.974500e+04
+50%      1.092840e+05
+75%      2.253325e+05
+max      1.296112e+07
+Name: Data.Totals.Property.All, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#second major crime group summary: property</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'Data.Totals.Violent.All'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>count    3.115000e+03
+mean     4.594917e+04
+std      1.759960e+05
+min      3.700000e+01
+25%      3.318000e+03
+50%      1.154800e+04
+75%      2.880400e+04
+max      1.932274e+06
+Name: Data.Totals.Violent.All, dtype: float64</code></pre>
+</div>
+</div>
+<p><strong>Descriptive Statistics</strong>: We can clearly see that the number of violent crimes over a period of time, over all the states is higher than the number of property crimes</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>corr_year_property_crime <span class="op">=</span> crime_data[<span class="st">'Year'</span>].corr(crime_data[<span class="st">'Data.Totals.Property.All'</span>])</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>corr_year_property_crime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>0.030803762684870506</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>corr_year_violent_crime <span class="op">=</span> crime_data[<span class="st">'Year'</span>].corr(crime_data[<span class="st">'Data.Totals.Violent.All'</span>])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>corr_year_violent_crime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>0.062184163818709594</code></pre>
+</div>
+</div>
+<p><strong>Correlations</strong>: To-Do</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>missing_values_cd <span class="op">=</span> crime_data.isnull()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>missing_values_count <span class="op">=</span> missing_values_cd.<span class="bu">sum</span>()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(missing_values_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>State                            0
+Year                             0
+Data.Population                  0
+Data.Rates.Property.All          0
+Data.Rates.Property.Burglary     0
+Data.Rates.Property.Larceny      0
+Data.Rates.Property.Motor        0
+Data.Rates.Violent.All           0
+Data.Rates.Violent.Assault       0
+Data.Rates.Violent.Murder        0
+Data.Rates.Violent.Rape          0
+Data.Rates.Violent.Robbery       0
+Data.Totals.Property.All         0
+Data.Totals.Property.Burglary    0
+Data.Totals.Property.Larceny     0
+Data.Totals.Property.Motor       0
+Data.Totals.Violent.All          0
+Data.Totals.Violent.Assault      0
+Data.Totals.Violent.Murder       0
+Data.Totals.Violent.Rape         0
+Data.Totals.Violent.Robbery      0
+dtype: int64</code></pre>
+</div>
+</div>
+<p><strong>Missing Values</strong>: We can see that we have no missing values in our dataset by the result of the above cell!</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>label_encoder <span class="op">=</span> LabelEncoder()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'State_Encoded'</span>] <span class="op">=</span> label_encoder.fit_transform(crime_data[<span class="st">'State'</span>])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>state_encoding_mapping <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(label_encoder.classes_, label_encoder.transform(label_encoder.classes_)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(state_encoding_mapping)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'Alabama': 0, 'Alaska': 1, 'Arizona': 2, 'Arkansas': 3, 'California': 4, 'Colorado': 5, 'Connecticut': 6, 'Delaware': 7, 'District of Columbia': 8, 'Florida': 9, 'Georgia': 10, 'Hawaii': 11, 'Idaho': 12, 'Illinois': 13, 'Indiana': 14, 'Iowa': 15, 'Kansas': 16, 'Kentucky': 17, 'Louisiana': 18, 'Maine': 19, 'Maryland': 20, 'Massachusetts': 21, 'Michigan': 22, 'Minnesota': 23, 'Mississippi': 24, 'Missouri': 25, 'Montana': 26, 'Nebraska': 27, 'Nevada': 28, 'New Hampshire': 29, 'New Jersey': 30, 'New Mexico': 31, 'New York': 32, 'North Carolina': 33, 'North Dakota': 34, 'Ohio': 35, 'Oklahoma': 36, 'Oregon': 37, 'Pennsylvania': 38, 'Rhode Island': 39, 'South Carolina': 40, 'South Dakota': 41, 'Tennessee': 42, 'Texas': 43, 'United States': 44, 'Utah': 45, 'Vermont': 46, 'Virginia': 47, 'Washington': 48, 'West Virginia': 49, 'Wisconsin': 50, 'Wyoming': 51}</code></pre>
+</div>
+</div>
+<p><strong>Encoding Categorical Values</strong>: Above, we encoded the variable state as later, it might be useful when doing time-series analysis, maybe using additional data related to states etc</p>
+<div class="cell" data-scrolled="true" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See how much data per state, can the dataset be skewed? how many rows per state?</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>number_of_rows_for_state <span class="op">=</span> []</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>list_of_state_names <span class="op">=</span> []</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key,value <span class="kw">in</span> state_encoding_mapping.items():</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    list_of_state_names.append(key)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    key_data <span class="op">=</span> crime_data[crime_data[<span class="st">'State'</span>] <span class="op">==</span> key]</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    number_of_rows_for_state.append(key_data.shape[<span class="dv">0</span>])</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>plt.bar(state_encoding_mapping.values(),number_of_rows_for_state)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'State'</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of rows (info) for state'</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'States and Number of Rows for them'</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>As we can see, there are 60 entries per state (besides New York) so we don’t have to worry about data being skewed or bias (disproportionally many rows for a state). I don’t consider 5 less entries to be bias for the purposes of this research</p>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot: Property crimes vs Year vs Encoded States</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(crime_data[<span class="st">'Year'</span>], crime_data[<span class="st">'Data.Totals.Property.All'</span>], c<span class="op">=</span>crime_data[<span class="st">'State_Encoded'</span>], cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Encoded State'</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Property Crime Rates'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatter Plot: Year vs. Property Crime Numbers with Encoded State'</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot: Violent crimes vs Year vs Encoded States</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(crime_data[<span class="st">'Year'</span>], crime_data[<span class="st">'Data.Totals.Violent.All'</span>], c<span class="op">=</span>crime_data[<span class="st">'State_Encoded'</span>], cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Encoded State'</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Property Crime Rates'</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatter Plot: Year vs. Violent Crime Numbers with Encoded State'</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>crime_data[[<span class="st">'Data.Rates.Property.All'</span>, <span class="st">'Data.Rates.Violent.All'</span>]].boxplot()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Box Plot: Property Crime Rates vs. Violent Crime Rates'</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Rates per 100,000 population'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="st">'Property Crime Rates'</span>, <span class="st">'Violent Crime Rates'</span>])</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p><strong>Data Disrtibution &amp; Outliers</strong>: Through scatter plots, call them outliers or states with significant crime, we can see that total number of violent crimes and total number of property crimes is significantly larger in one of the state, which is in this group - ‘South Carolina’: 40, ‘South Dakota’: 41, ‘Tennessee’: 42, ‘Texas’: 43, ‘United States’: 44, ‘Utah’: 45, ‘Vermont’: 46, ‘Virginia’: 47, ‘Washington’: 48, ‘West Virginia’: 49, ‘Wisconsin’: 50, ‘Wyoming’: 51 Through analysis later, we will figure out which state exactly that is.</p>
+<p>Through box plot, we can see that over the years and over the states, the rate of property crimes is larger than the rate of violent crimes (rates per 100,000 population). This is interesting to keep in mind. We can also see that there is a fair amount of outliers for both of the crime rate, which suggests that there has been years and states, where during those years, that specific state was an “exception” compared to others and had a higher crime rate. Note that the outliers for violent crime rates are more tightly stacked together, suggesting that the rate of violent crimes faced way more exceptions than the rate of property crimes</p>
+</section>
+<section id="analysis" class="level1">
+<h1>Analysis</h1>
+<p>Now, let’s dive into our analysis. In order to get an answer for our final question, we will answer a set of related questions to help us guide to the final answer</p>
+<p>Draft Plan 1. For each state, what is the type of crime commited the most per year given in the dataset? Property or violence? 2. For each state, what is the rate of crimes commited (property or violent) per 100,000 people? (make a visualization) 3.What is the overall mean property crime and violent crime rate for each state? 4. Start filtering out the states. Based on our analsysis, which state is the safest state and the most dangerous state? (make a visulization) 5. What state will be the safest in future and most dangerous in future? (use naive bayes prediction and maybe for crime rate comparison) 6. Support findings with article analyzations (web scraping and analyze those articles using sentiment analysis) (make a visulization)</p>
+<p>Let us discover what is the group of crime (property or violence) commited the most (in terms on numbers, not rate) in every year in our dataset per state. Hence, we will be looking at 52 graphs.</p>
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a list of state names from crime_data</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>state_name_list <span class="op">=</span> crime_data[<span class="st">'State'</span>].tolist()</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get rid of duplicates</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>state_name_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(state_name_list))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#TO-DO: put these graphs all together in smaller size (tightlayout)</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> state <span class="kw">in</span> state_name_list:</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    state_data <span class="op">=</span> crime_data[crime_data[<span class="st">'State'</span>] <span class="op">==</span> state]</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    plt.plot(state_data[<span class="st">'Year'</span>], state_data[<span class="st">'Data.Totals.Property.All'</span>], label<span class="op">=</span><span class="st">'Number of property crimes'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Number of property crimes'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> plt.gca().twinx() </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    ax2.plot(state_data[<span class="st">'Year'</span>], state_data[<span class="st">'Data.Totals.Violent.All'</span>], label<span class="op">=</span><span class="st">'Number of violent crimes'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(<span class="st">'Number of violent crimes'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'</span><span class="sc">{</span>state<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-4.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-5.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-6.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-7.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-8.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-9.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-10.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-11.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-12.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-13.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-14.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-15.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-16.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-17.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-18.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-19.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-20.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-21.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-22.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-23.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-24.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-25.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-26.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-27.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-28.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-29.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-30.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-31.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-32.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-33.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-34.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-35.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-36.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-37.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-38.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-39.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-40.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-41.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-42.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-43.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-44.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-45.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-46.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-47.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-48.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-49.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-50.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-51.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-15-output-52.png" class="img-fluid"></p>
+</div>
+</div>
+<p>To-DO: analyze the findings per each state - short summary</p>
+<p>Question #2: To-DO - make a tight layout</p>
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question #3: </span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># How did overall crime rate change over time? </span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#(take the mean of crime numbers (total violent and total property)</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#in year X for each state and make a graph) - </span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#x is year and y is number of crimes. </span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#is America getting more dangerous? (make a visulization)</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>state_list <span class="op">=</span> crime_data[<span class="st">'State'</span>].unique()</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>year_list <span class="op">=</span> crime_data[<span class="st">'Year'</span>].unique()</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>state_average_data <span class="op">=</span> {}</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> state <span class="kw">in</span> state_list:</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    total_property_rate <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    total_violent_rate <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> year_list:</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        state_year_data <span class="op">=</span> crime_data[(crime_data[<span class="st">'State'</span>] <span class="op">==</span> state) <span class="op">&amp;</span> (crime_data[<span class="st">'Year'</span>] <span class="op">==</span> year)]</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> state_year_data.empty: <span class="co">#new york lacks some years</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>            total_property_rate <span class="op">+=</span> state_year_data[<span class="st">'Data.Totals.Property.All'</span>].iloc[<span class="dv">0</span>]</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>            total_violent_rate <span class="op">+=</span> state_year_data[<span class="st">'Data.Totals.Violent.All'</span>].iloc[<span class="dv">0</span>]</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    average_property_rate <span class="op">=</span> total_property_rate <span class="op">/</span> <span class="bu">len</span>(year_list)</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    average_violent_rate <span class="op">=</span> total_violent_rate <span class="op">/</span> <span class="bu">len</span>(year_list)</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    state_average_data[state] <span class="op">=</span> {<span class="st">'Average_Property_Total'</span>: average_property_rate, <span class="st">'Average_Violent_Total'</span>: average_violent_rate}</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(state_average_data)</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'Alabama': {'Average_Property_Total': 136768.5, 'Average_Violent_Total': 18508.666666666668}, 'Alaska': {'Average_Property_Total': 20261.5, 'Average_Violent_Total': 3019.5333333333333}, 'Arizona': {'Average_Property_Total': 197824.86666666667, 'Average_Violent_Total': 19911.033333333333}, 'Arkansas': {'Average_Property_Total': 78616.93333333333, 'Average_Violent_Total': 10001.683333333332}, 'California': {'Average_Property_Total': 1208911.4166666667, 'Average_Violent_Total': 178274.26666666666}, 'Colorado': {'Average_Property_Total': 146760.38333333333, 'Average_Violent_Total': 13687.4}, 'Connecticut': {'Average_Property_Total': 103832.43333333333, 'Average_Violent_Total': 9536.616666666667}, 'Delaware': {'Average_Property_Total': 26798.433333333334, 'Average_Violent_Total': 3519.0333333333333}, 'District of Columbia': {'Average_Property_Total': 38926.46666666667, 'Average_Violent_Total': 10208.016666666666}, 'Florida': {'Average_Property_Total': 618748.6833333333, 'Average_Violent_Total': 92006.7}, 'Georgia': {'Average_Property_Total': 267742.1, 'Average_Violent_Total': 31531.683333333334}, 'Hawaii': {'Average_Property_Total': 50483.583333333336, 'Average_Violent_Total': 2509.116666666667}, 'Idaho': {'Average_Property_Total': 31387.916666666668, 'Average_Violent_Total': 2468.8}, 'Illinois': {'Average_Property_Total': 419136.35, 'Average_Violent_Total': 71362.3}, 'Indiana': {'Average_Property_Total': 189577.03333333333, 'Average_Violent_Total': 19014.233333333334}, 'Iowa': {'Average_Property_Total': 82625.78333333334, 'Average_Violent_Total': 6069.05}, 'Kansas': {'Average_Property_Total': 90718.7, 'Average_Violent_Total': 8476.583333333334}, 'Kentucky': {'Average_Property_Total': 93422.66666666667, 'Average_Violent_Total': 9916.483333333334}, 'Louisiana': {'Average_Property_Total': 166274.36666666667, 'Average_Violent_Total': 25214.483333333334}, 'Maine': {'Average_Property_Total': 31184.75, 'Average_Violent_Total': 1462.2333333333333}, 'Maryland': {'Average_Property_Total': 182855.31666666668, 'Average_Violent_Total': 31413.85}, 'Massachusetts': {'Average_Property_Total': 190894.58333333334, 'Average_Violent_Total': 26613.083333333332}, 'Michigan': {'Average_Property_Total': 373326.38333333336, 'Average_Violent_Total': 51955.13333333333}, 'Minnesota': {'Average_Property_Total': 142725.1, 'Average_Violent_Total': 10470.266666666666}, 'Mississippi': {'Average_Property_Total': 71379.55, 'Average_Violent_Total': 7701.033333333334}, 'Missouri': {'Average_Property_Total': 194511.08333333334, 'Average_Violent_Total': 25464.9}, 'Montana': {'Average_Property_Total': 27897.966666666667, 'Average_Violent_Total': 1889.2666666666667}, 'Nebraska': {'Average_Property_Total': 50064.21666666667, 'Average_Violent_Total': 4168.283333333334}, 'Nevada': {'Average_Property_Total': 59584.083333333336, 'Average_Violent_Total': 9304.75}, 'New Hampshire': {'Average_Property_Total': 24746.95, 'Average_Violent_Total': 1386.05}, 'New Jersey': {'Average_Property_Total': 250409.31666666668, 'Average_Violent_Total': 30264.333333333332}, 'New Mexico': {'Average_Property_Total': 68482.88333333333, 'Average_Violent_Total': 9776.683333333332}, 'New York': {'Average_Property_Total': 586752.9333333333, 'Average_Violent_Total': 114974.15}, 'North Carolina': {'Average_Property_Total': 246830.16666666666, 'Average_Violent_Total': 30799.833333333332}, 'North Dakota': {'Average_Property_Total': 14100.9, 'Average_Violent_Total': 705.55}, 'Ohio': {'Average_Property_Total': 376886.11666666664, 'Average_Violent_Total': 37474.316666666666}, 'Oklahoma': {'Average_Property_Total': 120534.76666666666, 'Average_Violent_Total': 13305.216666666667}, 'Oregon': {'Average_Property_Total': 129653.21666666666, 'Average_Violent_Total': 10191.533333333333}, 'Pennsylvania': {'Average_Property_Total': 284103.1666666667, 'Average_Violent_Total': 39508.666666666664}, 'Rhode Island': {'Average_Property_Total': 34552.76666666667, 'Average_Violent_Total': 2691.516666666667}, 'South Carolina': {'Average_Property_Total': 138643.0, 'Average_Violent_Total': 22546.833333333332}, 'South Dakota': {'Average_Property_Total': 15684.533333333333, 'Average_Violent_Total': 1378.2833333333333}, 'Tennessee': {'Average_Property_Total': 176231.88333333333, 'Average_Violent_Total': 27627.833333333332}, 'Texas': {'Average_Property_Total': 769527.7666666667, 'Average_Violent_Total': 87850.6}, 'United States': {'Average_Property_Total': 9257655.883333333, 'Average_Violent_Total': 1194983.4166666667}, 'Utah': {'Average_Property_Total': 74449.88333333333, 'Average_Violent_Total': 4367.433333333333}, 'Vermont': {'Average_Property_Total': 14435.9, 'Average_Violent_Total': 619.5}, 'Virginia': {'Average_Property_Total': 181328.58333333334, 'Average_Violent_Total': 17226.883333333335}, 'Washington': {'Average_Property_Total': 228140.98333333334, 'Average_Violent_Total': 17172.583333333332}, 'West Virginia': {'Average_Property_Total': 35292.183333333334, 'Average_Violent_Total': 3684.1}, 'Wisconsin': {'Average_Property_Total': 146787.65, 'Average_Violent_Total': 10252.45}, 'Wyoming': {'Average_Property_Total': 14278.95, 'Average_Violent_Total': 1061.45}}</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
