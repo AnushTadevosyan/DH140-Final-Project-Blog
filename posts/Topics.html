@@ -184,7 +184,7 @@ Link to Forum “Is New Hampshire safe for minorities?”: https://www.reddit.co
 <h1>Methods</h1>
 <p><strong>Data Presentation &amp; Exploration</strong> <strong>Basic Information about the dataset</strong>: The dataset classifies crimes into two groups: property &amp; violent crimes. Property crime refers to burglary, larceny, and motor related crime while violent crime refers to assault, murder, rape, and robbery. These reports range from the year 1960 to 2019. With this in mind, let’s understand and explore our data.</p>
 <p>The dataset has 21 columns and 3115 rows. As mentioned, the dataset covers the crimes in states from the year 1960 to 2019 and we can see that half of data is for years 1990-2019</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pmdarima <span class="im">as</span> pm</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pmdarima <span class="im">import</span> auto_arima</span>
@@ -929,66 +929,64 @@ Root Mean Squared Error for Violent Rates: 27.454519967879005</code></pre>
 </div>
 <p>It is important to note that we have to consider the Root Mean Squared Error when analyzing results. However, as you can see, our predictions follow the general trend as the test data in the beginning</p>
 <p>Now, let’s dive into Reddit and see what people say about District of Columbia and New Hampshire in terms of crime and safety!</p>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#website - url - https://www.reddit.com/r/washingtondc/comments/xx6g4e/crime_in_dc/</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'reddit_DC.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'/home/jovyan/Final_Project/reddit_DC.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    dc_reddit_content <span class="op">=</span> <span class="bu">file</span>.read()</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>dc_reddit_content <span class="op">=</span> dc_reddit_content.lower()</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>sia <span class="op">=</span> vader.SentimentIntensityAnalyzer()</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>dc_reddit_word_token <span class="op">=</span> word_tokenize(dc_reddit_content)</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>myStopWords <span class="op">=</span> stopwords.words(<span class="st">'english'</span>)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">#get rid of stopwords</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>dc_reddit_content_nostop <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> dc_reddit_word_token <span class="cf">if</span> w <span class="kw">not</span> <span class="kw">in</span> myStopWords]</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">#get rid of numbers</span></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>dc_reddit_cleaned <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> dc_reddit_content_nostop <span class="cf">if</span> <span class="kw">not</span> w.isdigit()]</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>pos_word_list <span class="op">=</span> []</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>neg_word_list <span class="op">=</span> []</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word <span class="kw">in</span> dc_reddit_cleaned:</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> sia.polarity_scores(word)</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> score[<span class="st">'compound'</span>] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        pos_word_list.append(word)</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> score[<span class="st">'compound'</span>] <span class="op">&lt;</span> <span class="dv">0</span>:</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>        neg_word_list.append(word)</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>stemmed_positive_words <span class="op">=</span> [PorterStemmer().stem(w) <span class="cf">for</span> w <span class="kw">in</span> pos_word_list]</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>most_positive_words <span class="op">=</span> nltk.FreqDist(stemmed_positive_words).most_common(<span class="dv">15</span>)</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>most_positive_words.reverse() <span class="co">#so its similiar to the graphs shown</span></span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>stemmed_negative_words <span class="op">=</span> [PorterStemmer().stem(w) <span class="cf">for</span> w <span class="kw">in</span> neg_word_list]</span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>most_negative_words <span class="op">=</span> nltk.FreqDist(stemmed_negative_words).most_common(<span class="dv">15</span>)</span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>most_negative_words.reverse()</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Positive: horizontal bar plot</span></span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(most_positive_words, columns<span class="op">=</span>[<span class="st">'Positive Words'</span>, <span class="st">'Frequency'</span>])</span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'orange'</span></span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>df.plot(x<span class="op">=</span><span class="st">'Positive Words'</span>, y<span class="op">=</span><span class="st">'Frequency'</span>, kind<span class="op">=</span><span class="st">'barh'</span>, legend<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span>color)</span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Positive Words'</span>)</span>
-<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Positive Words'</span>)</span>
-<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Crime in DC: Positive Words'</span>)</span>
-<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative: horizontal bar plot</span></span>
-<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(most_negative_words, columns<span class="op">=</span>[<span class="st">'Negative Words'</span>, <span class="st">'Frequency'</span>])</span>
-<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>color_1 <span class="op">=</span> <span class="st">'purple'</span></span>
-<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a>df_1.plot(x<span class="op">=</span><span class="st">'Negative Words'</span>, y<span class="op">=</span><span class="st">'Frequency'</span>, kind<span class="op">=</span><span class="st">'barh'</span>, legend<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span>color_1)</span>
-<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Negative Words'</span>)</span>
-<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency'</span>)</span>
-<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Negative Words'</span>)</span>
-<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Crime in DC: Negative Words'</span>)</span>
-<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>sia <span class="op">=</span> vader.SentimentIntensityAnalyzer()</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>dc_reddit_word_token <span class="op">=</span> word_tokenize(dc_reddit_content)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>myStopWords <span class="op">=</span> stopwords.words(<span class="st">'english'</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">#get rid of stopwords</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>dc_reddit_content_nostop <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> dc_reddit_word_token <span class="cf">if</span> w <span class="kw">not</span> <span class="kw">in</span> myStopWords]</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">#get rid of numbers</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>dc_reddit_cleaned <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> dc_reddit_content_nostop <span class="cf">if</span> <span class="kw">not</span> w.isdigit()]</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>pos_word_list <span class="op">=</span> []</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>neg_word_list <span class="op">=</span> []</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word <span class="kw">in</span> dc_reddit_cleaned:</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> sia.polarity_scores(word)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> score[<span class="st">'compound'</span>] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>        pos_word_list.append(word)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> score[<span class="st">'compound'</span>] <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        neg_word_list.append(word)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>stemmed_positive_words <span class="op">=</span> [PorterStemmer().stem(w) <span class="cf">for</span> w <span class="kw">in</span> pos_word_list]</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>most_positive_words <span class="op">=</span> nltk.FreqDist(stemmed_positive_words).most_common(<span class="dv">15</span>)</span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>most_positive_words.reverse() <span class="co">#so its similiar to the graphs shown</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>stemmed_negative_words <span class="op">=</span> [PorterStemmer().stem(w) <span class="cf">for</span> w <span class="kw">in</span> neg_word_list]</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>most_negative_words <span class="op">=</span> nltk.FreqDist(stemmed_negative_words).most_common(<span class="dv">15</span>)</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>most_negative_words.reverse()</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Positive: horizontal bar plot</span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(most_positive_words, columns<span class="op">=</span>[<span class="st">'Positive Words'</span>, <span class="st">'Frequency'</span>])</span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'orange'</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>df.plot(x<span class="op">=</span><span class="st">'Positive Words'</span>, y<span class="op">=</span><span class="st">'Frequency'</span>, kind<span class="op">=</span><span class="st">'barh'</span>, legend<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span>color)</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Positive Words'</span>)</span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Positive Words'</span>)</span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Crime in DC: Positive Words'</span>)</span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative: horizontal bar plot</span></span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(most_negative_words, columns<span class="op">=</span>[<span class="st">'Negative Words'</span>, <span class="st">'Frequency'</span>])</span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a>color_1 <span class="op">=</span> <span class="st">'purple'</span></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a>df_1.plot(x<span class="op">=</span><span class="st">'Negative Words'</span>, y<span class="op">=</span><span class="st">'Frequency'</span>, kind<span class="op">=</span><span class="st">'barh'</span>, legend<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span>color_1)</span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Negative Words'</span>)</span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Negative Words'</span>)</span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Crime in DC: Negative Words'</span>)</span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
-<pre><code>FileNotFoundError: [Errno 2] No such file or directory: 'reddit_DC.txt'</code></pre>
+<pre><code>FileNotFoundError: [Errno 2] No such file or directory: 'Final_Project/reddit_DC.txt'</code></pre>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#website - url - https://www.reddit.com/r/newhampshire/comments/wafenm/is_new_hampshire_safe_for_minorities/</span></span>
@@ -1046,6 +1044,9 @@ Root Mean Squared Error for Violent Rates: 27.454519967879005</code></pre>
 <span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Is New Hampshire safe for minorities: Negative Words'</span>)</span>
 <span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-error">
+<pre><code>FileNotFoundError: [Errno 2] No such file or directory: 'Final_Project/nh_reddit.txt'</code></pre>
+</div>
 </div>
 </section>
 <section id="discussion-of-results" class="level1">
