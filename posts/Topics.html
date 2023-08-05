@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Final_Project - date-modified: “07/26/2023”</title>
+<title>Final_Project - Introduction</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,7 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">date-modified: “07/26/2023”</h1>
+      <h1 class="title">Introduction</h1>
                       </div>
   </div>
     
@@ -166,32 +166,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>– title: “Crime in United States” description: “This blogpost is analyzing crimes in US states over range of years” author: “Anush Tadevosyan” date: “07/26/2023”</p>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>For this project, I have chosen to work with the dataset that contains information about various crimes in US states for a wide range of years</p>
-<p>Link to Dataset: https://corgis-edu.github.io/corgis/csv/state_crime/</p>
-<p>I have chosen this dataset as I was always interested in crime stories, documentaries and statistics. I am curious to see what I can find. My end goal is to find the safest state and the most dangerous state in terms of crimes and try to predict which state will be safest in future and which state will be more dangerous in future using machine learning!</p>
-<p>To-DO : see which state had highest type of crime per year</p>
-</section>
-<section id="data-presentation-exploration" class="level1">
-<h1>Data Presentation &amp; Exploration</h1>
-<p><strong>Basic Information</strong>: The dataset classify crimes into two groups: property &amp; violent crime.Property crime refers to burglary, larceny, and motor related crime while violent crime refers to assault, murder, rape, and robbery. These reports go from 1960 to 2019. With this in mind, let’s understand and explore our data.</p>
-<p>The dataset has 21 columns and 3115 rows. We can see that the years of data goes from 1960 to 2019. We can also see that half of data is for years 1990-2019. If we look at overall rate of the two major types of crimes (property &amp; violent)</p>
-<p>It should include at least 4 exploratory data visualizations</p>
+<p>Anush Tadevosyan<br>
+08/04/2023<br>
+“Exploring Crime in United States”</p>
+<p>In this project, we will answer various question about crimes in US states for a wide range of years</p>
+<p>Link to Dataset: https://corgis-edu.github.io/corgis/csv/state_crime/<br>
+Link to Forum “Crime in DC”: https://www.reddit.com/r/washingtondc/comments/xx6g4e/crime_in_dc/<br>
+Link to Forum “Is New Hampshire safe for minorities?”: https://www.reddit.com/r/newhampshire/comments/wafenm/is_new_hampshire_safe_for_minorities/</p>
+<p>The reason for choosing this particular dataset is my personal interest in crime stories and documentaries. I am curious to see what can we find and what will be the conclusions that we will land upon after final findings. The end goal of this project is to find the safest state and the most dangerous state in terms of crimes in United States (according to dataset) and to predict how the rate of crimes will change in those states in future!</p>
+<section id="methods" class="level1">
+<h1>Methods</h1>
+<p><strong>Data Presentation &amp; Exploration</strong> <strong>Basic Information about the dataset</strong>: The dataset classifies crimes into two groups: property &amp; violent crimes. Property crime refers to burglary, larceny, and motor related crime while violent crime refers to assault, murder, rape, and robbery. These reports range from the year 1960 to 2019. With this in mind, let’s understand and explore our data.</p>
 <div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>crime_data <span class="op">=</span> pd.read_csv(<span class="st">'/home/jovyan/DH140-Final-Project/state_crime.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install pmdarima</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Requirement already satisfied: pmdarima in /opt/conda/lib/python3.10/site-packages (2.0.3)
+Requirement already satisfied: joblib&gt;=0.11 in /opt/conda/lib/python3.10/site-packages (from pmdarima) (1.3.1)
+Requirement already satisfied: Cython!=0.29.18,!=0.29.31,&gt;=0.29 in /opt/conda/lib/python3.10/site-packages (from pmdarima) (3.0.0)
+Requirement already satisfied: numpy&gt;=1.21.2 in /opt/conda/lib/python3.10/site-packages (from pmdarima) (1.25.0)
+Requirement already satisfied: pandas&gt;=0.19 in /opt/conda/lib/python3.10/site-packages (from pmdarima) (1.5.3)
+Requirement already satisfied: scikit-learn&gt;=0.22 in /opt/conda/lib/python3.10/site-packages (from pmdarima) (1.3.0)
+Requirement already satisfied: scipy&gt;=1.3.2 in /opt/conda/lib/python3.10/site-packages (from pmdarima) (1.11.1)
+Requirement already satisfied: statsmodels&gt;=0.13.2 in /opt/conda/lib/python3.10/site-packages (from pmdarima) (0.14.0)
+Requirement already satisfied: urllib3 in /opt/conda/lib/python3.10/site-packages (from pmdarima) (1.26.14)
+Requirement already satisfied: setuptools!=50.0.0,&gt;=38.6.0 in /opt/conda/lib/python3.10/site-packages (from pmdarima) (67.7.2)
+Requirement already satisfied: python-dateutil&gt;=2.8.1 in /opt/conda/lib/python3.10/site-packages (from pandas&gt;=0.19-&gt;pmdarima) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /opt/conda/lib/python3.10/site-packages (from pandas&gt;=0.19-&gt;pmdarima) (2023.3)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /opt/conda/lib/python3.10/site-packages (from scikit-learn&gt;=0.22-&gt;pmdarima) (3.1.0)
+Requirement already satisfied: patsy&gt;=0.5.2 in /opt/conda/lib/python3.10/site-packages (from statsmodels&gt;=0.13.2-&gt;pmdarima) (0.5.3)
+Requirement already satisfied: packaging&gt;=21.3 in /opt/conda/lib/python3.10/site-packages (from statsmodels&gt;=0.13.2-&gt;pmdarima) (23.0)
+Requirement already satisfied: six in /opt/conda/lib/python3.10/site-packages (from patsy&gt;=0.5.2-&gt;statsmodels&gt;=0.13.2-&gt;pmdarima) (1.16.0)</code></pre>
 </div>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#total data summary</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>crime_data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+</div>
+<p>The dataset has 21 columns and 3115 rows. As mentioned, the dataset covers the crimes in states from the year 1960 to 2019 and we can see that half of data is for years 1990-2019</p>
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pmdarima <span class="im">as</span> pm</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pmdarima <span class="im">import</span> auto_arima</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> LabelEncoder</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> MinMaxScaler</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> nltk</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.tokenize <span class="im">import</span> word_tokenize</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.sentiment <span class="im">import</span> vader</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> stopwords</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.corpus <span class="im">import</span> opinion_lexicon</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> nltk.stem.porter <span class="im">import</span> PorterStemmer</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>nltk.download(<span class="st">'stopwords'</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>crime_data <span class="op">=</span> pd.read_csv(<span class="st">'/home/jovyan/DH140-Final-Project/state_crime.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[nltk_data] Downloading package stopwords to /home/jovyan/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#total data summary</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>crime_data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
 <div>
 
 
@@ -412,10 +446,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first major crime group summary: property</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'Data.Totals.Property.All'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first major crime group summary: property</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'Data.Totals.Property.All'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>count    3.115000e+03
 mean     3.560081e+05
 std      1.321823e+06
@@ -427,10 +461,10 @@ max      1.296112e+07
 Name: Data.Totals.Property.All, dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#second major crime group summary: property</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'Data.Totals.Violent.All'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#second major crime group summary: property</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'Data.Totals.Violent.All'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
 <pre><code>count    3.115000e+03
 mean     4.594917e+04
 std      1.759960e+05
@@ -442,26 +476,26 @@ max      1.932274e+06
 Name: Data.Totals.Violent.All, dtype: float64</code></pre>
 </div>
 </div>
-<p><strong>Descriptive Statistics</strong>: We can clearly see that the number of violent crimes over a period of time, over all the states is higher than the number of property crimes</p>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>corr_year_property_crime <span class="op">=</span> crime_data[<span class="st">'Year'</span>].corr(crime_data[<span class="st">'Data.Totals.Property.All'</span>])</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>corr_year_property_crime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>0.030803762684870506</code></pre>
-</div>
-</div>
+<p><strong>Descriptive Statistics</strong>: If we look at the mean number of property and violent crimes over the years, property crimes are more common. The mean rate of property crimes also exceeds that of violent crimes. This is good news to us as we can already tell that the crimes that directly, phsyically affect people are less than other types of crimes historically!</p>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>corr_year_violent_crime <span class="op">=</span> crime_data[<span class="st">'Year'</span>].corr(crime_data[<span class="st">'Data.Totals.Violent.All'</span>])</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>corr_year_violent_crime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>corr_year_property_crime <span class="op">=</span> crime_data[<span class="st">'Data.Population'</span>].corr(crime_data[<span class="st">'Data.Totals.Property.All'</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>corr_year_property_crime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>0.062184163818709594</code></pre>
+<pre><code>0.9588214769635185</code></pre>
 </div>
 </div>
-<p><strong>Correlations</strong>: To-Do</p>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>missing_values_cd <span class="op">=</span> crime_data.isnull()</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>missing_values_count <span class="op">=</span> missing_values_cd.<span class="bu">sum</span>()</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(missing_values_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>corr_year_violent_crime <span class="op">=</span> crime_data[<span class="st">'Data.Population'</span>].corr(crime_data[<span class="st">'Data.Totals.Violent.All'</span>])</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>corr_year_violent_crime</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>0.9551347420176186</code></pre>
+</div>
+</div>
+<p><strong>Correlations</strong>: As we can see from the results, there is a strong correlation in the size of population and number of crimes. This indicates, that generally, as the population of a state increases, the total number of property/violent crimes tends to increase</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>missing_values_cd <span class="op">=</span> crime_data.isnull()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>missing_values_count <span class="op">=</span> missing_values_cd.<span class="bu">sum</span>()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(missing_values_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>State                            0
 Year                             0
@@ -487,299 +521,815 @@ Data.Totals.Violent.Robbery      0
 dtype: int64</code></pre>
 </div>
 </div>
-<p><strong>Missing Values</strong>: We can see that we have no missing values in our dataset by the result of the above cell!</p>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>label_encoder <span class="op">=</span> LabelEncoder()</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'State_Encoded'</span>] <span class="op">=</span> label_encoder.fit_transform(crime_data[<span class="st">'State'</span>])</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>state_encoding_mapping <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(label_encoder.classes_, label_encoder.transform(label_encoder.classes_)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p><strong>Missing Values</strong>: As we can see that we have no missing values in our dataset by looking at the output of the cell above</p>
 <div class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(state_encoding_mapping)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>label_encoder <span class="op">=</span> LabelEncoder()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'State_Encoded'</span>] <span class="op">=</span> label_encoder.fit_transform(crime_data[<span class="st">'State'</span>])</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>state_encoding_mapping <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(label_encoder.classes_, label_encoder.transform(label_encoder.classes_)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(state_encoding_mapping)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'Alabama': 0, 'Alaska': 1, 'Arizona': 2, 'Arkansas': 3, 'California': 4, 'Colorado': 5, 'Connecticut': 6, 'Delaware': 7, 'District of Columbia': 8, 'Florida': 9, 'Georgia': 10, 'Hawaii': 11, 'Idaho': 12, 'Illinois': 13, 'Indiana': 14, 'Iowa': 15, 'Kansas': 16, 'Kentucky': 17, 'Louisiana': 18, 'Maine': 19, 'Maryland': 20, 'Massachusetts': 21, 'Michigan': 22, 'Minnesota': 23, 'Mississippi': 24, 'Missouri': 25, 'Montana': 26, 'Nebraska': 27, 'Nevada': 28, 'New Hampshire': 29, 'New Jersey': 30, 'New Mexico': 31, 'New York': 32, 'North Carolina': 33, 'North Dakota': 34, 'Ohio': 35, 'Oklahoma': 36, 'Oregon': 37, 'Pennsylvania': 38, 'Rhode Island': 39, 'South Carolina': 40, 'South Dakota': 41, 'Tennessee': 42, 'Texas': 43, 'United States': 44, 'Utah': 45, 'Vermont': 46, 'Virginia': 47, 'Washington': 48, 'West Virginia': 49, 'Wisconsin': 50, 'Wyoming': 51}</code></pre>
 </div>
 </div>
-<p><strong>Encoding Categorical Values</strong>: Above, we encoded the variable state as later, it might be useful when doing time-series analysis, maybe using additional data related to states etc</p>
-<div class="cell" data-scrolled="true" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See how much data per state, can the dataset be skewed? how many rows per state?</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>number_of_rows_for_state <span class="op">=</span> []</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>list_of_state_names <span class="op">=</span> []</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key,value <span class="kw">in</span> state_encoding_mapping.items():</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    list_of_state_names.append(key)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    key_data <span class="op">=</span> crime_data[crime_data[<span class="st">'State'</span>] <span class="op">==</span> key]</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    number_of_rows_for_state.append(key_data.shape[<span class="dv">0</span>])</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>plt.bar(state_encoding_mapping.values(),number_of_rows_for_state)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'State'</span>)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of rows (info) for state'</span>)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'States and Number of Rows for them'</span>)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<p>As we can see, there are 60 entries per state (besides New York) so we don’t have to worry about data being skewed or bias (disproportionally many rows for a state). I don’t consider 5 less entries to be bias for the purposes of this research</p>
-<div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot: Property crimes vs Year vs Encoded States</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(crime_data[<span class="st">'Year'</span>], crime_data[<span class="st">'Data.Totals.Property.All'</span>], c<span class="op">=</span>crime_data[<span class="st">'State_Encoded'</span>], cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Encoded State'</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Property Crime Rates'</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatter Plot: Year vs. Property Crime Numbers with Encoded State'</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Encoding Categorical Values</strong>: Above, we encoded the variable state, as later, it might be useful when doing time-series analysis, maybe using additional data related to states etc</p>
+<div class="cell" data-scrolled="true" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See how much data per state, can the dataset be skewed? how many rows per state?</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>number_of_rows_for_state <span class="op">=</span> []</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>list_of_state_names <span class="op">=</span> []</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key,value <span class="kw">in</span> state_encoding_mapping.items():</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    list_of_state_names.append(key)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    key_data <span class="op">=</span> crime_data[crime_data[<span class="st">'State'</span>] <span class="op">==</span> key]</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    number_of_rows_for_state.append(key_data.shape[<span class="dv">0</span>])</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>plt.bar(state_encoding_mapping.values(),number_of_rows_for_state)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'State'</span>)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Number of rows (info) for state'</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'States and Number of Rows for them'</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="Topics_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
 </div>
 </div>
+<p>As we can see, there are 60 entries per state (besides New York) so we don’t have to worry about data being skewed or bias (disproportionally number rows for a state compared to other states). In this analysism we won’t consider 5 less entries to be bias for the purposes of this research</p>
 <div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot: Violent crimes vs Year vs Encoded States</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(crime_data[<span class="st">'Year'</span>], crime_data[<span class="st">'Data.Totals.Violent.All'</span>], c<span class="op">=</span>crime_data[<span class="st">'State_Encoded'</span>], cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Encoded State'</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Property Crime Rates'</span>)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatter Plot: Year vs. Violent Crime Numbers with Encoded State'</span>)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot: Property crimes vs Year vs Encoded States</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(crime_data[<span class="st">'Year'</span>], crime_data[<span class="st">'Data.Rates.Property.All'</span>], c<span class="op">=</span>crime_data[<span class="st">'State_Encoded'</span>], cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Encoded State'</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Property Crime Rates'</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatter Plot: Year vs. Property Crime Numbers with Encoded State'</span>)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="Topics_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>crime_data[[<span class="st">'Data.Rates.Property.All'</span>, <span class="st">'Data.Rates.Violent.All'</span>]].boxplot()</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Box Plot: Property Crime Rates vs. Violent Crime Rates'</span>)</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Rates per 100,000 population'</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="st">'Property Crime Rates'</span>, <span class="st">'Violent Crime Rates'</span>])</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot: Violent crimes vs Year vs Encoded States</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.scatter(crime_data[<span class="st">'Year'</span>], crime_data[<span class="st">'Data.Rates.Violent.All'</span>], c<span class="op">=</span>crime_data[<span class="st">'State_Encoded'</span>], cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'Encoded State'</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Violent Crime Rates'</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Scatter Plot: Year vs. Violent Crime Numbers with Encoded State'</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="Topics_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<p><strong>Data Disrtibution &amp; Outliers</strong>: Through scatter plots, call them outliers or states with significant crime, we can see that total number of violent crimes and total number of property crimes is significantly larger in one of the state, which is in this group - ‘South Carolina’: 40, ‘South Dakota’: 41, ‘Tennessee’: 42, ‘Texas’: 43, ‘United States’: 44, ‘Utah’: 45, ‘Vermont’: 46, ‘Virginia’: 47, ‘Washington’: 48, ‘West Virginia’: 49, ‘Wisconsin’: 50, ‘Wyoming’: 51 Through analysis later, we will figure out which state exactly that is.</p>
-<p>Through box plot, we can see that over the years and over the states, the rate of property crimes is larger than the rate of violent crimes (rates per 100,000 population). This is interesting to keep in mind. We can also see that there is a fair amount of outliers for both of the crime rate, which suggests that there has been years and states, where during those years, that specific state was an “exception” compared to others and had a higher crime rate. Note that the outliers for violent crime rates are more tightly stacked together, suggesting that the rate of violent crimes faced way more exceptions than the rate of property crimes</p>
-</section>
-<section id="analysis" class="level1">
-<h1>Analysis</h1>
-<p>Now, let’s dive into our analysis. In order to get an answer for our final question, we will answer a set of related questions to help us guide to the final answer</p>
-<p>Draft Plan 1. For each state, what is the type of crime commited the most per year given in the dataset? Property or violence? 2. For each state, what is the rate of crimes commited (property or violent) per 100,000 people? (make a visualization) 3.What is the overall mean property crime and violent crime rate for each state? 4. Start filtering out the states. Based on our analsysis, which state is the safest state and the most dangerous state? (make a visulization) 5. What state will be the safest in future and most dangerous in future? (use naive bayes prediction and maybe for crime rate comparison) 6. Support findings with article analyzations (web scraping and analyze those articles using sentiment analysis) (make a visulization)</p>
-<p>Let us discover what is the group of crime (property or violence) commited the most (in terms on numbers, not rate) in every year in our dataset per state. Hence, we will be looking at 52 graphs.</p>
 <div class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a list of state names from crime_data</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>state_name_list <span class="op">=</span> crime_data[<span class="st">'State'</span>].tolist()</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get rid of duplicates</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>state_name_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(state_name_list))</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#TO-DO: put these graphs all together in smaller size (tightlayout)</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> state <span class="kw">in</span> state_name_list:</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    state_data <span class="op">=</span> crime_data[crime_data[<span class="st">'State'</span>] <span class="op">==</span> state]</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    plt.plot(state_data[<span class="st">'Year'</span>], state_data[<span class="st">'Data.Totals.Property.All'</span>], label<span class="op">=</span><span class="st">'Number of property crimes'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'Year'</span>)</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'Number of property crimes'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> plt.gca().twinx() </span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    ax2.plot(state_data[<span class="st">'Year'</span>], state_data[<span class="st">'Data.Totals.Violent.All'</span>], label<span class="op">=</span><span class="st">'Number of violent crimes'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylabel(<span class="st">'Number of violent crimes'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'</span><span class="sc">{</span>state<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>crime_data[[<span class="st">'Data.Rates.Property.All'</span>, <span class="st">'Data.Rates.Violent.All'</span>]].boxplot()</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Box Plot: Property Crime Rates vs. Violent Crime Rates'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Rates per 100,000 population'</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="st">'Property Crime Rates'</span>, <span class="st">'Violent Crime Rates'</span>])</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="Topics_files/figure-html/cell-15-output-1.png" class="img-fluid"></p>
 </div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-2.png" class="img-fluid"></p>
 </div>
+<p><strong>Data Disrtibution &amp; Outliers</strong>: Through scatter plots, call them outliers or states with significant crime, we can see that total rate of violent crimes and total rate of property crimes is significantly larger in one of the state, which is in this group - ‘Alabama’: 0, ‘Alaska’: 1, ‘Arizona’: 2, ‘Arkansas’: 3, ‘California’: 4, ‘Colorado’: 5, ‘Connecticut’: 6, ‘Delaware’: 7, ‘District of Columbia’: 8, ‘Florida’: 9, ‘Georgia’: 10, ‘Hawaii’: 11, ‘Idaho’: 12, ‘Illinois’: 13, ‘Indiana’: 14, ‘Iowa’: 15, ‘Kansas’: 16, ‘Kentucky’: 17, ‘Louisiana’: 18, ‘Maine’: 19, ‘Maryland’: 20 Through analysis later, we will figure out which state exactly that is.</p>
+<p>Through box plot, we can see that over the years and over the states, the rate of property crimes is larger than the rate of violent crimes (rates per 100,000 population).We can also see that there is a fair amount of outliers for both of the crime rate, which suggests that there has been years and states, where during those years, that specific state was an “exception” compared to others and had a higher crime rate. Note that the outliers for violent crime rates are more tightly stacked together, suggesting that the rate of violent crimes faced way more exceptions than the rate of property crimes</p>
+<p><strong>Analytical Process</strong>: After having some understanding of our data and exploring it, it is time to dive into the actual analysis. Based on exploration, we figured out an important point about exceptional crime rate in some states and that of states that falls between 0-20 in the Encoded State list, has a significantly higher crime rate. Now, we will analyze the graphs for each of the states and proceed to answer the main questions of this analysis, for which, we will be using “weights” to determine the safety score for each state and afterwards, using ARIMA statistical model, we will predict the future rate of crimes for those states!</p>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<p>We will be using code to answer the following questions 1. For each state, analyze the total number of propery crimes and total number of violent crimes throughout the years of 1960-2020 2. For each state, analyze the rate of property crimes and rate of violent crime throughout the years 1960-2020. 3. Based on historical data, which state is the safest state and the most dangerous state? Rank the states 4. What will be the rate of total property crimes and total violent crimes in those two states in 2050? 5. Support findings with reddit post analyzations</p>
+<div class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a list of state names from crime_data</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>state_name_list <span class="op">=</span> crime_data[<span class="st">'State'</span>].tolist()</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get rid of duplicates</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>state_name_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(state_name_list))</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> state <span class="kw">in</span> state_name_list:</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    state_data <span class="op">=</span> crime_data[crime_data[<span class="st">'State'</span>] <span class="op">==</span> state]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#create new figure and axes ax_1</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    figure, ax_1 <span class="op">=</span> plt.subplots()</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    ax_1.plot(state_data[<span class="st">'Year'</span>], state_data[<span class="st">'Data.Totals.Property.All'</span>], label<span class="op">=</span><span class="st">'Property crimes'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    ax_1.set_xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    ax_1.set_ylabel(<span class="st">'Number of property crimes'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#create twin axis ax_2</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    ax_2 <span class="op">=</span> ax_1.twinx()</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    ax_2.plot(state_data[<span class="st">'Year'</span>], state_data[<span class="st">'Data.Totals.Violent.All'</span>], label<span class="op">=</span><span class="st">'Violent crimes'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    ax_2.set_ylabel(<span class="st">'Number of violent crimes'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    max_property <span class="op">=</span> state_data[<span class="st">'Data.Totals.Property.All'</span>].<span class="bu">max</span>()</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    max_violent <span class="op">=</span> state_data[<span class="st">'Data.Totals.Violent.All'</span>].<span class="bu">max</span>()</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># determine y axis limit</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    y_max <span class="op">=</span> <span class="bu">max</span>(max_property,max_violent)</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#make sure both y axes have the same range</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    ax_1.set_ylim(<span class="dv">0</span>, y_max)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    ax_2.set_ylim(<span class="dv">0</span>, y_max)</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    mean_population <span class="op">=</span> state_data[<span class="st">'Data.Population'</span>].mean()</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'</span><span class="sc">{</span>state<span class="sc">}</span><span class="ss"> : Mean population over the years - </span><span class="sc">{</span><span class="bu">int</span>(mean_population)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-3.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-4.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-5.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-6.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-7.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-8.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-9.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-10.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-11.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-12.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-13.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-14.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-15.png" class="img-fluid"></p>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-16.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-1.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-17.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-2.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-18.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-3.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-19.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-4.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-20.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-5.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-21.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-6.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-22.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-7.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-23.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-8.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-24.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-9.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-25.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-10.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-26.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-11.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-27.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-12.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-28.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-13.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-29.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-14.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-30.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-15.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-31.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-16.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-32.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-17.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-33.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-18.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-34.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-19.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-35.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-20.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-36.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-21.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-37.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-22.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-38.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-23.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-39.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-24.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-40.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-25.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-41.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-26.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-42.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-27.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-43.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-28.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-44.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-29.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-45.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-30.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-46.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-31.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-47.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-32.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-48.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-33.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-49.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-34.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-50.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-35.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-51.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-36.png" class="img-fluid"></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="Topics_files/figure-html/cell-15-output-52.png" class="img-fluid"></p>
+<p><img src="Topics_files/figure-html/cell-16-output-37.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-38.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-39.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-40.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-41.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-42.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-43.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-44.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-45.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-46.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-47.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-48.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-49.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-50.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-51.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-16-output-52.png" class="img-fluid"></p>
 </div>
 </div>
-<p>To-DO: analyze the findings per each state - short summary</p>
-<p>Question #2: To-DO - make a tight layout</p>
-<div class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question #3: </span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># How did overall crime rate change over time? </span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#(take the mean of crime numbers (total violent and total property)</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#in year X for each state and make a graph) - </span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#x is year and y is number of crimes. </span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#is America getting more dangerous? (make a visulization)</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>state_list <span class="op">=</span> crime_data[<span class="st">'State'</span>].unique()</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>year_list <span class="op">=</span> crime_data[<span class="st">'Year'</span>].unique()</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>state_average_data <span class="op">=</span> {}</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> state <span class="kw">in</span> state_list:</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    total_property_rate <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    total_violent_rate <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> year <span class="kw">in</span> year_list:</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        state_year_data <span class="op">=</span> crime_data[(crime_data[<span class="st">'State'</span>] <span class="op">==</span> state) <span class="op">&amp;</span> (crime_data[<span class="st">'Year'</span>] <span class="op">==</span> year)]</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> state_year_data.empty: <span class="co">#new york lacks some years</span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>            total_property_rate <span class="op">+=</span> state_year_data[<span class="st">'Data.Totals.Property.All'</span>].iloc[<span class="dv">0</span>]</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>            total_violent_rate <span class="op">+=</span> state_year_data[<span class="st">'Data.Totals.Violent.All'</span>].iloc[<span class="dv">0</span>]</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    average_property_rate <span class="op">=</span> total_property_rate <span class="op">/</span> <span class="bu">len</span>(year_list)</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>    average_violent_rate <span class="op">=</span> total_violent_rate <span class="op">/</span> <span class="bu">len</span>(year_list)</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    state_average_data[state] <span class="op">=</span> {<span class="st">'Average_Property_Total'</span>: average_property_rate, <span class="st">'Average_Violent_Total'</span>: average_violent_rate}</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(state_average_data)</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> state <span class="kw">in</span> state_name_list:</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    state_data <span class="op">=</span> crime_data[crime_data[<span class="st">'State'</span>] <span class="op">==</span> state]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#create new figure and axes ax_1</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    figure, ax_1 <span class="op">=</span> plt.subplots()</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    ax_1.plot(state_data[<span class="st">'Year'</span>], state_data[<span class="st">'Data.Rates.Property.All'</span>], label<span class="op">=</span><span class="st">'Property crimes'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    ax_1.set_xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    ax_1.set_ylabel(<span class="st">'Rate of property crimes'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#create twin axis ax_2</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    ax_2 <span class="op">=</span> ax_1.twinx()</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    ax_2.plot(state_data[<span class="st">'Year'</span>], state_data[<span class="st">'Data.Rates.Violent.All'</span>], label<span class="op">=</span><span class="st">'Violent crimes'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    ax_2.set_ylabel(<span class="st">'Rate of violent crimes'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    max_property <span class="op">=</span> state_data[<span class="st">'Data.Rates.Property.All'</span>].<span class="bu">max</span>()</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    max_violent <span class="op">=</span> state_data[<span class="st">'Data.Rates.Violent.All'</span>].<span class="bu">max</span>()</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># determine y axis limit</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    y_max <span class="op">=</span> <span class="bu">max</span>(max_property,max_violent)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#make sure both y axes have the same range</span></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    ax_1.set_ylim(<span class="dv">0</span>, y_max)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    ax_2.set_ylim(<span class="dv">0</span>, y_max)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f'</span><span class="sc">{</span>state<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-2.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-4.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-5.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-6.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-7.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-8.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-9.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-10.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-11.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-12.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-13.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-14.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-15.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-16.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-17.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-18.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-19.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-20.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-21.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-22.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-23.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-24.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-25.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-26.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-27.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-28.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-29.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-30.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-31.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-32.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-33.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-34.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-35.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-36.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-37.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-38.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-39.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-40.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-41.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-42.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-43.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-44.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-45.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-46.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-47.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-48.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-49.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-50.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-51.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-17-output-52.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Now, after having visualization for each individual state, in case if you’re interested about a particular state, let’s find out the safest and most dangerous state according to data from years 1960-2020! I will be assigning weight of 70% to violent crimes since it involves human life, which is more precious than anything else, in this case - properties. To normalize data, we will be using MinMaxScaler from sklearn library</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#MinMaxScaler method</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>weight_property <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>weight_violent <span class="op">=</span> <span class="fl">0.7</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>crime_data_sklearn <span class="op">=</span> crime_data.copy()</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>columns <span class="op">=</span> [<span class="st">'Data.Rates.Property.All'</span>,<span class="st">'Data.Rates.Violent.All'</span>]</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> columns:</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  crime_data_sklearn[col] <span class="op">=</span> MinMaxScaler().fit_transform(np.array(crime_data_sklearn[col]).reshape(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>crime_data[<span class="st">'Safety score'</span>] <span class="op">=</span> (crime_data_sklearn[<span class="st">'Data.Rates.Property.All'</span>] <span class="op">*</span> weight_property) <span class="op">+</span> (crime_data_sklearn[<span class="st">'Data.Rates.Violent.All'</span>] <span class="op">*</span> weight_violent)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>plt.bar(crime_data[<span class="st">'State_Encoded'</span>],crime_data[<span class="st">'Safety score'</span>])</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Safery Score by State'</span>)</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Encoded States'</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Safery Score'</span>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MinMaxScaler Method: The safest state according to historical data is </span><span class="sc">{</span>crime_data<span class="sc">.</span>loc[crime_data[<span class="st">'Safety score'</span>].idxmin(), <span class="st">'State'</span>]<span class="sc">}</span><span class="ss"> with a safety score of </span><span class="sc">{</span>crime_data[<span class="st">'Safety score'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MinMaxScaler Method: The most dangerous state according to historical data is </span><span class="sc">{</span>crime_data<span class="sc">.</span>loc[crime_data[<span class="st">'Safety score'</span>].idxmax(), <span class="st">'State'</span>]<span class="sc">}</span><span class="ss"> with a safety score of </span><span class="sc">{</span>crime_data[<span class="st">'Safety score'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As the result show, according to this dataset, by using rate of crime and weights given to crime type, the safest state is New Hampshire and the most dangerous state is District of Columbia!</p>
+<p>Historical data can take us so far as we have seen from the graphs. Now let’s jump to year 2050 and try to find out what will be the most dangerous and safest state in future! For the purposes of this analysis, we will choose to use Autoregressive Integrated Moving Average (ARIMA) statistical model</p>
+<div class="cell" data-scrolled="true" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>new_hampshire_data <span class="op">=</span> crime_data[crime_data[<span class="st">'State'</span>] <span class="op">==</span> <span class="st">'New Hampshire'</span>]</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>new_hampshire_data.set_index(<span class="st">'Year'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># split data into training and test sets</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#property</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>training_prop <span class="op">=</span> new_hampshire_data.iloc[:<span class="op">-</span><span class="dv">15</span>, :]</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>test_prop <span class="op">=</span> new_hampshire_data.iloc[<span class="op">-</span><span class="dv">15</span>:, :]</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#violence</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>training_viol <span class="op">=</span> new_hampshire_data.iloc[:<span class="op">-</span><span class="dv">15</span>, :]</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>test_viol <span class="op">=</span> new_hampshire_data.iloc[<span class="op">-</span><span class="dv">15</span>:, :]</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># train the ARIMA model</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>model_prop <span class="op">=</span> auto_arima(y<span class="op">=</span>training_prop[<span class="st">'Data.Rates.Property.All'</span>], seasonal<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>model_viol <span class="op">=</span> auto_arima(y<span class="op">=</span>training_viol[<span class="st">'Data.Rates.Violent.All'</span>], seasonal<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co"># forecast for year 2050</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>n_periods <span class="op">=</span> <span class="dv">45</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>predictions_prop <span class="op">=</span> model_prop.predict(n_periods<span class="op">=</span>n_periods)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>predictions_viol <span class="op">=</span> model_viol.predict(n_periods<span class="op">=</span>n_periods)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="co"># start from the year of test set</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>prediction_index_prop <span class="op">=</span> pd.date_range(start<span class="op">=</span><span class="st">'2005'</span>, periods<span class="op">=</span>n_periods, freq<span class="op">=</span><span class="st">'Y'</span>)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>prediction_index_viol <span class="op">=</span> pd.date_range(start<span class="op">=</span><span class="st">'2005'</span>, periods<span class="op">=</span>n_periods, freq<span class="op">=</span><span class="st">'Y'</span>)</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="co"># make 'data.rates.proprerty.all' into a list for error calculation</span></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a><span class="co">#property</span></span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>test_set_property_rates <span class="op">=</span> test_prop[<span class="st">'Data.Rates.Property.All'</span>].tolist()</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>predictions_set_property_rates <span class="op">=</span> predictions_prop.tolist()</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a><span class="co">#violence</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>test_set_violent_rates <span class="op">=</span> test_viol[<span class="st">'Data.Rates.Violent.All'</span>].tolist()</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>predictions_set_violent_rates <span class="op">=</span> predictions_viol.tolist()</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>squared_diff_sum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> test_value,pred_value <span class="kw">in</span> <span class="bu">zip</span>(test_set_property_rates,predictions_set_property_rates):</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>  squared_diff <span class="op">=</span> (pred_value <span class="op">-</span> test_value) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>  squared_diff_sum <span class="op">+=</span> squared_diff</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> math.sqrt(squared_diff_sum <span class="op">/</span> <span class="bu">len</span>(test_set_property_rates))</span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Root Mean Squared Error for Property Rates:"</span>, rmse)</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>squared_diff_sum_1 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> test_value,pred_value <span class="kw">in</span> <span class="bu">zip</span>(test_set_violent_rates,predictions_set_violent_rates):</span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>  squared_diff_1 <span class="op">=</span> (pred_value <span class="op">-</span> test_value) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>  squared_diff_sum_1 <span class="op">+=</span> squared_diff_1</span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>rmse_1 <span class="op">=</span> math.sqrt(squared_diff_sum_1 <span class="op">/</span> <span class="bu">len</span>(test_set_violent_rates))</span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Root Mean Squared Error for Violent Rates:"</span>, rmse_1)</span>
+<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a><span class="co">#-----Property Crimes</span></span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a>fig,ax<span class="op">=</span>plt.subplots()</span>
+<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> training_prop[<span class="st">'Data.Rates.Property.All'</span>].plot(legend <span class="op">=</span> <span class="va">True</span>,label<span class="op">=</span><span class="st">'Training Data'</span>)</span>
+<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a>test_prop[<span class="st">'Data.Rates.Property.All'</span>].plot(legend <span class="op">=</span> <span class="va">True</span>,ax<span class="op">=</span>ax, label <span class="op">=</span> <span class="st">'Test Data'</span>)</span>
+<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a>ax.plot(prediction_index_prop.year,predictions_prop,label <span class="op">=</span> <span class="st">'Predicted Data'</span>, color <span class="op">=</span> <span class="st">'green'</span>)</span>
+<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb26-60"><a href="#cb26-60" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'New Hampshire: Predicted Rate of Total Property crimes in future - Year 2050'</span>)</span>
+<span id="cb26-62"><a href="#cb26-62" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Rate of Total Property Crimes'</span>)</span>
+<span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a><span class="co">#----Violent Crimes</span></span>
+<span id="cb26-67"><a href="#cb26-67" aria-hidden="true" tabindex="-1"></a>fig_1,ax_1<span class="op">=</span>plt.subplots()</span>
+<span id="cb26-68"><a href="#cb26-68" aria-hidden="true" tabindex="-1"></a>ax_1 <span class="op">=</span> training_viol[<span class="st">'Data.Rates.Violent.All'</span>].plot(legend <span class="op">=</span> <span class="va">True</span>,label<span class="op">=</span><span class="st">'Training Data'</span>)</span>
+<span id="cb26-69"><a href="#cb26-69" aria-hidden="true" tabindex="-1"></a>test_viol[<span class="st">'Data.Rates.Violent.All'</span>].plot(legend <span class="op">=</span> <span class="va">True</span>,ax<span class="op">=</span>ax_1, label <span class="op">=</span> <span class="st">'Test Data'</span>)</span>
+<span id="cb26-70"><a href="#cb26-70" aria-hidden="true" tabindex="-1"></a>ax_1.plot(prediction_index_viol.year,predictions_viol,label <span class="op">=</span> <span class="st">'Predicted Data'</span>, color <span class="op">=</span> <span class="st">'green'</span>)</span>
+<span id="cb26-71"><a href="#cb26-71" aria-hidden="true" tabindex="-1"></a>ax_1.legend()</span>
+<span id="cb26-72"><a href="#cb26-72" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb26-73"><a href="#cb26-73" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'New Hampshire: Predicted Rate of Total Violent crimes in future - Year 2050'</span>)</span>
+<span id="cb26-74"><a href="#cb26-74" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb26-75"><a href="#cb26-75" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Rate of Total Violent Crimes'</span>)</span>
+<span id="cb26-76"><a href="#cb26-76" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb26-77"><a href="#cb26-77" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/opt/conda/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: ValueWarning: No supported index is available. Prediction results will be given with an integer index beginning at `start`.
+  return get_prediction_index(
+/opt/conda/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: FutureWarning: No supported index is available. In the next version, calling this method in a model without a supported index will result in an exception.
+  return get_prediction_index(
+/opt/conda/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: ValueWarning: No supported index is available. Prediction results will be given with an integer index beginning at `start`.
+  return get_prediction_index(
+/opt/conda/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: FutureWarning: No supported index is available. In the next version, calling this method in a model without a supported index will result in an exception.
+  return get_prediction_index(</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'Alabama': {'Average_Property_Total': 136768.5, 'Average_Violent_Total': 18508.666666666668}, 'Alaska': {'Average_Property_Total': 20261.5, 'Average_Violent_Total': 3019.5333333333333}, 'Arizona': {'Average_Property_Total': 197824.86666666667, 'Average_Violent_Total': 19911.033333333333}, 'Arkansas': {'Average_Property_Total': 78616.93333333333, 'Average_Violent_Total': 10001.683333333332}, 'California': {'Average_Property_Total': 1208911.4166666667, 'Average_Violent_Total': 178274.26666666666}, 'Colorado': {'Average_Property_Total': 146760.38333333333, 'Average_Violent_Total': 13687.4}, 'Connecticut': {'Average_Property_Total': 103832.43333333333, 'Average_Violent_Total': 9536.616666666667}, 'Delaware': {'Average_Property_Total': 26798.433333333334, 'Average_Violent_Total': 3519.0333333333333}, 'District of Columbia': {'Average_Property_Total': 38926.46666666667, 'Average_Violent_Total': 10208.016666666666}, 'Florida': {'Average_Property_Total': 618748.6833333333, 'Average_Violent_Total': 92006.7}, 'Georgia': {'Average_Property_Total': 267742.1, 'Average_Violent_Total': 31531.683333333334}, 'Hawaii': {'Average_Property_Total': 50483.583333333336, 'Average_Violent_Total': 2509.116666666667}, 'Idaho': {'Average_Property_Total': 31387.916666666668, 'Average_Violent_Total': 2468.8}, 'Illinois': {'Average_Property_Total': 419136.35, 'Average_Violent_Total': 71362.3}, 'Indiana': {'Average_Property_Total': 189577.03333333333, 'Average_Violent_Total': 19014.233333333334}, 'Iowa': {'Average_Property_Total': 82625.78333333334, 'Average_Violent_Total': 6069.05}, 'Kansas': {'Average_Property_Total': 90718.7, 'Average_Violent_Total': 8476.583333333334}, 'Kentucky': {'Average_Property_Total': 93422.66666666667, 'Average_Violent_Total': 9916.483333333334}, 'Louisiana': {'Average_Property_Total': 166274.36666666667, 'Average_Violent_Total': 25214.483333333334}, 'Maine': {'Average_Property_Total': 31184.75, 'Average_Violent_Total': 1462.2333333333333}, 'Maryland': {'Average_Property_Total': 182855.31666666668, 'Average_Violent_Total': 31413.85}, 'Massachusetts': {'Average_Property_Total': 190894.58333333334, 'Average_Violent_Total': 26613.083333333332}, 'Michigan': {'Average_Property_Total': 373326.38333333336, 'Average_Violent_Total': 51955.13333333333}, 'Minnesota': {'Average_Property_Total': 142725.1, 'Average_Violent_Total': 10470.266666666666}, 'Mississippi': {'Average_Property_Total': 71379.55, 'Average_Violent_Total': 7701.033333333334}, 'Missouri': {'Average_Property_Total': 194511.08333333334, 'Average_Violent_Total': 25464.9}, 'Montana': {'Average_Property_Total': 27897.966666666667, 'Average_Violent_Total': 1889.2666666666667}, 'Nebraska': {'Average_Property_Total': 50064.21666666667, 'Average_Violent_Total': 4168.283333333334}, 'Nevada': {'Average_Property_Total': 59584.083333333336, 'Average_Violent_Total': 9304.75}, 'New Hampshire': {'Average_Property_Total': 24746.95, 'Average_Violent_Total': 1386.05}, 'New Jersey': {'Average_Property_Total': 250409.31666666668, 'Average_Violent_Total': 30264.333333333332}, 'New Mexico': {'Average_Property_Total': 68482.88333333333, 'Average_Violent_Total': 9776.683333333332}, 'New York': {'Average_Property_Total': 586752.9333333333, 'Average_Violent_Total': 114974.15}, 'North Carolina': {'Average_Property_Total': 246830.16666666666, 'Average_Violent_Total': 30799.833333333332}, 'North Dakota': {'Average_Property_Total': 14100.9, 'Average_Violent_Total': 705.55}, 'Ohio': {'Average_Property_Total': 376886.11666666664, 'Average_Violent_Total': 37474.316666666666}, 'Oklahoma': {'Average_Property_Total': 120534.76666666666, 'Average_Violent_Total': 13305.216666666667}, 'Oregon': {'Average_Property_Total': 129653.21666666666, 'Average_Violent_Total': 10191.533333333333}, 'Pennsylvania': {'Average_Property_Total': 284103.1666666667, 'Average_Violent_Total': 39508.666666666664}, 'Rhode Island': {'Average_Property_Total': 34552.76666666667, 'Average_Violent_Total': 2691.516666666667}, 'South Carolina': {'Average_Property_Total': 138643.0, 'Average_Violent_Total': 22546.833333333332}, 'South Dakota': {'Average_Property_Total': 15684.533333333333, 'Average_Violent_Total': 1378.2833333333333}, 'Tennessee': {'Average_Property_Total': 176231.88333333333, 'Average_Violent_Total': 27627.833333333332}, 'Texas': {'Average_Property_Total': 769527.7666666667, 'Average_Violent_Total': 87850.6}, 'United States': {'Average_Property_Total': 9257655.883333333, 'Average_Violent_Total': 1194983.4166666667}, 'Utah': {'Average_Property_Total': 74449.88333333333, 'Average_Violent_Total': 4367.433333333333}, 'Vermont': {'Average_Property_Total': 14435.9, 'Average_Violent_Total': 619.5}, 'Virginia': {'Average_Property_Total': 181328.58333333334, 'Average_Violent_Total': 17226.883333333335}, 'Washington': {'Average_Property_Total': 228140.98333333334, 'Average_Violent_Total': 17172.583333333332}, 'West Virginia': {'Average_Property_Total': 35292.183333333334, 'Average_Violent_Total': 3684.1}, 'Wisconsin': {'Average_Property_Total': 146787.65, 'Average_Violent_Total': 10252.45}, 'Wyoming': {'Average_Property_Total': 14278.95, 'Average_Violent_Total': 1061.45}}</code></pre>
+<pre><code>Root Mean Squared Error for Property Rates: 328.16340617059114
+Root Mean Squared Error for Violent Rates: 27.454519967879005</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-19-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-19-output-4.png" class="img-fluid"></p>
 </div>
 </div>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dc_data <span class="op">=</span> crime_data[crime_data[<span class="st">'State'</span>] <span class="op">==</span> <span class="st">'District of Columbia'</span>]</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>dc_data.set_index(<span class="st">'Year'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># split data into training and test sets</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#property</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>training_prop <span class="op">=</span> dc_data.iloc[:<span class="op">-</span><span class="dv">15</span>, :]</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>test_prop <span class="op">=</span> dc_data.iloc[<span class="op">-</span><span class="dv">15</span>:, :]</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">#violence</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>training_viol <span class="op">=</span> dc_data.iloc[:<span class="op">-</span><span class="dv">15</span>, :]</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>test_viol <span class="op">=</span> dc_data.iloc[<span class="op">-</span><span class="dv">15</span>:, :]</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co"># train the ARIMA model</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>model_prop <span class="op">=</span> auto_arima(y<span class="op">=</span>training_prop[<span class="st">'Data.Rates.Property.All'</span>], seasonal<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>model_viol <span class="op">=</span> auto_arima(y<span class="op">=</span>training_viol[<span class="st">'Data.Rates.Violent.All'</span>], seasonal<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="co"># forecast for year 2050</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>n_periods <span class="op">=</span> <span class="dv">45</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>predictions_prop <span class="op">=</span> model_prop.predict(n_periods<span class="op">=</span>n_periods)</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>predictions_viol <span class="op">=</span> model_viol.predict(n_periods<span class="op">=</span>n_periods)</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a><span class="co"># start from the year of test set</span></span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>prediction_index_prop <span class="op">=</span> pd.date_range(start<span class="op">=</span><span class="st">'2005'</span>, periods<span class="op">=</span>n_periods, freq<span class="op">=</span><span class="st">'Y'</span>)</span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>prediction_index_viol <span class="op">=</span> pd.date_range(start<span class="op">=</span><span class="st">'2005'</span>, periods<span class="op">=</span>n_periods, freq<span class="op">=</span><span class="st">'Y'</span>)</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a><span class="co"># make 'data.rates.proprerty.all' into a list for error calculation</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a><span class="co">#property</span></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>test_set_property_rates <span class="op">=</span> test_prop[<span class="st">'Data.Rates.Property.All'</span>].tolist()</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>predictions_set_property_rates <span class="op">=</span> predictions_prop.tolist()</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a><span class="co">#violence</span></span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>test_set_violent_rates <span class="op">=</span> test_viol[<span class="st">'Data.Rates.Violent.All'</span>].tolist()</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>predictions_set_violent_rates <span class="op">=</span> predictions_viol.tolist()</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>squared_diff_sum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> test_value,pred_value <span class="kw">in</span> <span class="bu">zip</span>(test_set_property_rates,predictions_set_property_rates):</span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>  squared_diff <span class="op">=</span> (pred_value <span class="op">-</span> test_value) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>  squared_diff_sum <span class="op">+=</span> squared_diff</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> math.sqrt(squared_diff_sum <span class="op">/</span> <span class="bu">len</span>(test_set_property_rates))</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Root Mean Squared Error for Property Rates:"</span>, rmse)</span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>squared_diff_sum_1 <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> test_value,pred_value <span class="kw">in</span> <span class="bu">zip</span>(test_set_violent_rates,predictions_set_violent_rates):</span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>  squared_diff_1 <span class="op">=</span> (pred_value <span class="op">-</span> test_value) <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>  squared_diff_sum_1 <span class="op">+=</span> squared_diff_1</span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>rmse_1 <span class="op">=</span> math.sqrt(squared_diff_sum_1 <span class="op">/</span> <span class="bu">len</span>(test_set_violent_rates))</span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Root Mean Squared Error for Violent Rates:"</span>, rmse_1)</span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a><span class="co">#-----Property Crimes</span></span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>fig,ax<span class="op">=</span>plt.subplots()</span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> training_prop[<span class="st">'Data.Rates.Property.All'</span>].plot(legend <span class="op">=</span> <span class="va">True</span>,label<span class="op">=</span><span class="st">'Training Data'</span>)</span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>test_prop[<span class="st">'Data.Rates.Property.All'</span>].plot(legend <span class="op">=</span> <span class="va">True</span>,ax<span class="op">=</span>ax, label <span class="op">=</span> <span class="st">'Test Data'</span>)</span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>ax.plot(prediction_index_prop.year,predictions_prop,label <span class="op">=</span> <span class="st">'Predicted Data'</span>, color <span class="op">=</span> <span class="st">'green'</span>)</span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'District of Columbia: Predicted Rate of Total Property crimes in future - Year 2050'</span>)</span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Rate of Total Property Crimes'</span>)</span>
+<span id="cb29-64"><a href="#cb29-64" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb29-65"><a href="#cb29-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-66"><a href="#cb29-66" aria-hidden="true" tabindex="-1"></a><span class="co">#----Violent Crimes</span></span>
+<span id="cb29-67"><a href="#cb29-67" aria-hidden="true" tabindex="-1"></a>fig_1,ax_1<span class="op">=</span>plt.subplots()</span>
+<span id="cb29-68"><a href="#cb29-68" aria-hidden="true" tabindex="-1"></a>ax_1 <span class="op">=</span> training_viol[<span class="st">'Data.Rates.Violent.All'</span>].plot(legend <span class="op">=</span> <span class="va">True</span>,label<span class="op">=</span><span class="st">'Training Data'</span>)</span>
+<span id="cb29-69"><a href="#cb29-69" aria-hidden="true" tabindex="-1"></a>test_viol[<span class="st">'Data.Rates.Violent.All'</span>].plot(legend <span class="op">=</span> <span class="va">True</span>,ax<span class="op">=</span>ax_1, label <span class="op">=</span> <span class="st">'Test Data'</span>)</span>
+<span id="cb29-70"><a href="#cb29-70" aria-hidden="true" tabindex="-1"></a>ax_1.plot(prediction_index_viol.year,predictions_viol,label <span class="op">=</span> <span class="st">'Predicted Data'</span>, color <span class="op">=</span> <span class="st">'green'</span>)</span>
+<span id="cb29-71"><a href="#cb29-71" aria-hidden="true" tabindex="-1"></a>ax_1.legend()</span>
+<span id="cb29-72"><a href="#cb29-72" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb29-73"><a href="#cb29-73" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'District of Columbia: Predicted Rate of Total Violent crimes in future - Year 2050'</span>)</span>
+<span id="cb29-74"><a href="#cb29-74" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Year'</span>)</span>
+<span id="cb29-75"><a href="#cb29-75" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Rate of Total Violent Crimes'</span>)</span>
+<span id="cb29-76"><a href="#cb29-76" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/opt/conda/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: ValueWarning: No supported index is available. Prediction results will be given with an integer index beginning at `start`.
+  return get_prediction_index(
+/opt/conda/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: FutureWarning: No supported index is available. In the next version, calling this method in a model without a supported index will result in an exception.
+  return get_prediction_index(
+/opt/conda/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: ValueWarning: No supported index is available. Prediction results will be given with an integer index beginning at `start`.
+  return get_prediction_index(
+/opt/conda/lib/python3.10/site-packages/statsmodels/tsa/base/tsa_model.py:836: FutureWarning: No supported index is available. In the next version, calling this method in a model without a supported index will result in an exception.
+  return get_prediction_index(</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Root Mean Squared Error for Property Rates: 681.0253039858885
+Root Mean Squared Error for Violent Rates: 189.75492779963125</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-20-output-3.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-20-output-4.png" class="img-fluid"></p>
+</div>
+</div>
+<p>As we can see, the test values and predicted value differ by 300 crimes To-Do: Discuss the results</p>
+<p>Through Google Search about the two states, going into reddit to see what actual people say about the two states, we found interesting results</p>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#website - url - https://www.reddit.com/r/washingtondc/comments/xx6g4e/crime_in_dc/</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'reddit_DC.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    dc_reddit_content <span class="op">=</span> <span class="bu">file</span>.read()</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>dc_reddit_content <span class="op">=</span> dc_reddit_content.lower()</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>sia <span class="op">=</span> vader.SentimentIntensityAnalyzer()</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>dc_reddit_word_token <span class="op">=</span> word_tokenize(dc_reddit_content)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>myStopWords <span class="op">=</span> stopwords.words(<span class="st">'english'</span>)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co">#get rid of stopwords</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>dc_reddit_content_nostop <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> dc_reddit_word_token <span class="cf">if</span> w <span class="kw">not</span> <span class="kw">in</span> myStopWords]</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co">#get rid of numbers</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>dc_reddit_cleaned <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> dc_reddit_content_nostop <span class="cf">if</span> <span class="kw">not</span> w.isdigit()]</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>pos_word_list <span class="op">=</span> []</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>neg_word_list <span class="op">=</span> []</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word <span class="kw">in</span> dc_reddit_cleaned:</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> sia.polarity_scores(word)</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> score[<span class="st">'compound'</span>] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>        pos_word_list.append(word)</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> score[<span class="st">'compound'</span>] <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>        neg_word_list.append(word)</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>stemmed_positive_words <span class="op">=</span> [PorterStemmer().stem(w) <span class="cf">for</span> w <span class="kw">in</span> pos_word_list]</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>most_positive_words <span class="op">=</span> nltk.FreqDist(stemmed_positive_words).most_common(<span class="dv">15</span>)</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>most_positive_words.reverse() <span class="co">#so its similiar to the graphs shown</span></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>stemmed_negative_words <span class="op">=</span> [PorterStemmer().stem(w) <span class="cf">for</span> w <span class="kw">in</span> neg_word_list]</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>most_negative_words <span class="op">=</span> nltk.FreqDist(stemmed_negative_words).most_common(<span class="dv">15</span>)</span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>most_negative_words.reverse()</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Positive: horizontal bar plot</span></span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(most_positive_words, columns<span class="op">=</span>[<span class="st">'Positive Words'</span>, <span class="st">'Frequency'</span>])</span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'orange'</span></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>df.plot(x<span class="op">=</span><span class="st">'Positive Words'</span>, y<span class="op">=</span><span class="st">'Frequency'</span>, kind<span class="op">=</span><span class="st">'barh'</span>, legend<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span>color)</span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Positive Words'</span>)</span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Positive Words'</span>)</span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Crime in DC: Positive Words'</span>)</span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative: horizontal bar plot</span></span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(most_negative_words, columns<span class="op">=</span>[<span class="st">'Negative Words'</span>, <span class="st">'Frequency'</span>])</span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a>color_1 <span class="op">=</span> <span class="st">'purple'</span></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>df_1.plot(x<span class="op">=</span><span class="st">'Negative Words'</span>, y<span class="op">=</span><span class="st">'Frequency'</span>, kind<span class="op">=</span><span class="st">'barh'</span>, legend<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span>color_1)</span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Negative Words'</span>)</span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Negative Words'</span>)</span>
+<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Crime in DC: Negative Words'</span>)</span>
+<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-21-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-21-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#website - url - https://www.reddit.com/r/newhampshire/comments/wafenm/is_new_hampshire_safe_for_minorities/</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'nh_reddit.txt'</span>, <span class="st">'r'</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    nh_reddit_content <span class="op">=</span> <span class="bu">file</span>.read()</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>nh_reddit_content <span class="op">=</span> nh_reddit_content.lower()</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>sia <span class="op">=</span> vader.SentimentIntensityAnalyzer()</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>nh_reddit_word_token <span class="op">=</span> word_tokenize(nh_reddit_content)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>myStopWords <span class="op">=</span> stopwords.words(<span class="st">'english'</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co">#get rid of stopwords</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>nh_reddit_content_nostop <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> nh_reddit_word_token <span class="cf">if</span> w <span class="kw">not</span> <span class="kw">in</span> myStopWords]</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co">#get rid of numbers</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>nh_reddit_cleaned <span class="op">=</span> [w <span class="cf">for</span> w <span class="kw">in</span> nh_reddit_content_nostop <span class="cf">if</span> <span class="kw">not</span> w.isdigit()]</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>pos_word_list <span class="op">=</span> []</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>neg_word_list <span class="op">=</span> []</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word <span class="kw">in</span> nh_reddit_cleaned:</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    score <span class="op">=</span> sia.polarity_scores(word)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> score[<span class="st">'compound'</span>] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>        pos_word_list.append(word)</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> score[<span class="st">'compound'</span>] <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>        neg_word_list.append(word)</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>stemmed_positive_words <span class="op">=</span> [PorterStemmer().stem(w) <span class="cf">for</span> w <span class="kw">in</span> pos_word_list]</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>most_positive_words <span class="op">=</span> nltk.FreqDist(stemmed_positive_words).most_common(<span class="dv">15</span>)</span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>most_positive_words.reverse() <span class="co">#so its similiar to the graphs shown</span></span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>stemmed_negative_words <span class="op">=</span> [PorterStemmer().stem(w) <span class="cf">for</span> w <span class="kw">in</span> neg_word_list]</span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>most_negative_words <span class="op">=</span> nltk.FreqDist(stemmed_negative_words).most_common(<span class="dv">15</span>)</span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>most_negative_words.reverse()</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Positive: horizontal bar plot</span></span>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(most_positive_words, columns<span class="op">=</span>[<span class="st">'Positive Words'</span>, <span class="st">'Frequency'</span>])</span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>color <span class="op">=</span> <span class="st">'orange'</span></span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>df.plot(x<span class="op">=</span><span class="st">'Positive Words'</span>, y<span class="op">=</span><span class="st">'Frequency'</span>, kind<span class="op">=</span><span class="st">'barh'</span>, legend<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span>color)</span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Positive Words'</span>)</span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Positive Words'</span>)</span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Is New Hampshire safe for minorities: Positive Words'</span>)</span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative: horizontal bar plot</span></span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>df_1 <span class="op">=</span> pd.DataFrame(most_negative_words, columns<span class="op">=</span>[<span class="st">'Negative Words'</span>, <span class="st">'Frequency'</span>])</span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>color_1 <span class="op">=</span> <span class="st">'purple'</span></span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>df_1.plot(x<span class="op">=</span><span class="st">'Negative Words'</span>, y<span class="op">=</span><span class="st">'Frequency'</span>, kind<span class="op">=</span><span class="st">'barh'</span>, legend<span class="op">=</span><span class="va">False</span>, color<span class="op">=</span>color_1)</span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Negative Words'</span>)</span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Negative Words'</span>)</span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Is New Hampshire safe for minorities: Negative Words'</span>)</span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="Topics_files/figure-html/cell-22-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="discussion-of-results" class="level1">
+<h1>Discussion of Results</h1>
+<p>Based on the graphs above, let’s discuss our findings. First, lets summarize what we found to be general trend for states, in terms of property and violent crimes.<br>
+The analysis of property and violent crime trends across various U.S. states reveals distinctive patterns in both peak periods and general trends. Notably, Louisiana and Missouri experienced peak property and violent crime rates during the 1990s, reflecting a significant prevalence of criminal activities during that decade. Another group of states, including Arkansas, Kentucky, and several others, witnessed peak crime rates in the 1980s to 2000s, indicating prolonged periods of heightened criminal activities. In contrast, states like Nevada, South Carolina, Georgia, and Michigan exhibited relatively stable or fluctuating crime rates, suggesting varying degrees of control over criminal incidents. Additionally, states such as Arizona, Utah, North Dakota, and Alabama displayed unique peak periods for either property or violent crimes. When considering general trends, a substantial number of states demonstrated a consistent decrease in both property and violent crime rates over the years, which shows successful efforts in crime prevention and law enforcement. Conversely, states like Arkansas (in terms of violent crimes) and Tennessee experienced an overall increase in violent crime rates, demonstrating ongoing challenges in maintaining public safety.<br>
+Next, according to our analysis and historical data, by assigning more weight/importance to violent crime (0.7) as opposed to property crimes (0.3), as human lives matter much more than any property, we found out that the safest state is the state of New Hampshire, whereas on the other hand, according to our method of analysis, historically speaking, the most dangerous state is District of Columbia.<br>
+By conducting further analysis, we found that the total property crime rate will be slightly decreasing in New Hampshire in year 2050, and the total violent rate will stay the same. In constrast, luckily our predictions show that both rates will be decreasing slightly and then stabilizing. With this in mind, it is important to note that these results were obtained using our choice of statistical method and variables, however, results may vary depending on the algorithm chosen. One can refer to the Mean Squared Error to draw their own conclusions about the accuracy of the model.<br>
+Next step of our analysis was diving into public forums to understand what people say about these states. The query googled to find the forums where the same - “safety in {state_name} reddit” and one of the articles for each state was chosen. By conducting sentiment analsysis for the forum named “Crime in DC”, we see words like “violent, victim, assault, problem” to be prevelant. This suggests that people have discussed this issues and due to the existence of the words like “violent, assault, problem, victim, scary”, we can draw conclusion that there is an actual safety problem in DC as these words are specific, meaning that people most likely discussed crime cases, talking about victim, people who were assaulted and that crime is a problem in DC. Looking at the positive words, we see “safe, like, safer, better, thank”, which suggests that DC might be getting safer and better. In contrast, if we examine the forum “Is New Hampshire safe for minorities”, we see positive words like “safe, care, free, positive, funny, sure” which suggests that people generally refer that it is a safe state for minorities. Looking at the negative words, we see words like “racist, crime, attack, murder, problem”, which may suggests that people are discussing the issues of racism, discussing about prevalence of crime and more. However, we can see that the frequency of positive words considerably exceeds the frequency of negative words, which suggests that overall, people have a good opinion about safety of minorities in New Hampshire.<br>
+Although, the choice of forums might be considered to be bias, it is important to note that with data science projects that involve humanstic content, such as cultural, social or other type of data, the completness of data and potential bias become crucial considerations. With that in mind, the choice of forums supports the findings in this particular analysis and by no means suggests that other results may not be obtained.</p>
 
 
 </section>
